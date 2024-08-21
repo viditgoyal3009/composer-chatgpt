@@ -1,22 +1,39 @@
 <?php
 
 namespace Innovination\Chatgpt;
-use Illuminate\Support\Facades\Storage;
 
 class Chatgpt
 {
-    public function generateResponse($obj)
+    protected $api_key;
+
+    public $prompt, $messages, $model_name, $max_tokens, $temperature, $top_p, $frequency_penalty, $presence_penalty;
+
+    public function __construct()
     {
-        $api_key = env('GPT_API_KEY');
-        if(isset($obj->prompt))
+        $this->api_key = env('GPT_API_KEY');
+    }
+    public function generateResponse()
+    {
+        $api_key = $this->api_key;
+        $prompt = $this->prompt;
+        $model_name = $this->model_name??env('GPT_MODEL_NAME');
+
+        $max_tokens = $this->max_tokens??2500;
+        $temperature = $this->temperature??0.5;
+        $top_p = $this->top_p??1;
+        $frequency_penalty = $this->frequency_penalty??0;
+        $presence_penalty = $this->presence_penalty??0;
+
+
+        if(isset($prompt))
             $messages = [
                 [
                     "role" => "system",
-                    "content" => $obj->prompt
+                    "content" => $prompt
                 ]
                 ];
-        else if(isset($obj->messages))
-            $messages = $obj->messages;
+        else if(isset($this->messages))
+            $messages = $this->messages;
         else
             $messages = [];
 
@@ -28,12 +45,12 @@ class Chatgpt
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST => "POST",
             CURLOPT_POSTFIELDS => json_encode([
-                "model" => env('GPT_MODEL_NAME'),
-                "max_tokens" => 2500,
-                "temperature" => 0.5,
-                "top_p" => 1,
-                "frequency_penalty" => 0,
-                "presence_penalty" => 0,
+                "model" => $model_name,
+                "max_tokens" => $max_tokens,
+                "temperature" => $temperature,
+                "top_p" => $top_p,
+                "frequency_penalty" => $frequency_penalty,
+                "presence_penalty" => $presence_penalty,
                 "messages" => $messages,
             ]),
             CURLOPT_HTTPHEADER => array(

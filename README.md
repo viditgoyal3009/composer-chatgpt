@@ -1,13 +1,13 @@
 # Chatgpt package
 
-This Composer package allows you to convert text into audio using the ElevenLabs API.
+This Composer package allows you to chat with OpenAPI's Chatgpt API
 
 ## Installation
 
 To install this package, you can use Composer. Run the following command in your project directory:
 
 ```
-composer require innovination/elevenlabs
+composer require innovination/chatgpt
 ```
 
 ## Usage
@@ -17,18 +17,18 @@ To use this package, follow these steps:
 1. Import the package into your PHP file:
 
 ```php
-use Innovination\Elevenlabs;
+use Innovination\Chatgpt;
 ```
 
-2. Create an instance of the `Elevenlabs` class:
+2. Create an instance of the `Chatgpt` class:
 
 ```php
-$elevenlabs = new ElevenLabs();
+$chatgpt = new Chatgpt();
 ```
-3. Add ElevenLabs API key to your `.env` file
+3. Add GPT_API_KEY key to your `.env` file
 
 ```php
-XI_API_KEY='your-api-key'
+GPT_API_KEY='your-api-key'
 ```
 
 4. Convert text to audio:
