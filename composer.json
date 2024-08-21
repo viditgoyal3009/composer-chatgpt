@@ -1,0 +1,18 @@
+{
+    "name": "innovination/chatgpt",
+    "description": "a simple laravel package to communicate with chatgpt",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Innovination\\Chatgpt\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Vidit Goyal",
+            "email": "vidit@innovination.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
