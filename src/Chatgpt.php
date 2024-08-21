@@ -73,10 +73,10 @@ class Chatgpt
 
     public function audioToText($audio_path)
     {
-        $api_key = env('GPT_API_KEY');
+        $api_key = $this->api_key;
 
         $model = 'whisper-1';
-        $temp_file = '/tmp/'.Str::random(10).'.mp3';
+        $temp_file = '/tmp/'.\Str::random(10).'.mp3';
 
         // Step 1: Download the file from the URL
         $file_content = file_get_contents($audio_path);
@@ -112,6 +112,9 @@ class Chatgpt
         // dd($response);
         curl_close($ch);
         $response = json_decode($response);
+
+        // Delete the temporary file
+        unlink($temp_file);
 
         return $response;
     }

@@ -20,27 +20,18 @@ To use this package, follow these steps:
 use Innovination\Chatgpt;
 ```
 
-2. Create an instance of the `Chatgpt` class:
-
-```php
-$chatgpt = new Chatgpt();
-```
-3. Add GPT_API_KEY key to your `.env` file
+2. Add GPT keys to your `.env` file
 
 ```php
 GPT_API_KEY='your-api-key'
+GPT_MODEL_NAME='your-preferred model (ex. gpt-3.5-turbo-0125)'
 ```
-
-4. Convert text to audio:
+3. Create an instance of the `Chatgpt` class:
 
 ```php
-//Required
-$elevenlabs->voice_id = 'voice-id-on-elevenlabs';
-$elevenlabs->text = "Hello, world!";
-//Optional
-$elevenlabs->file_prefix = "prefix"; // default is audio
-$elevenlabs->path = "folder-name"; //default folder is audio
-$audioFile = $elevenlabs->generateAudio();
+$obj = new Chatgpt();
+$audio_path = 'link to audio';
+$transcription = $obj->audioToText($audio_path);
 ```
 
-The `generateAudio` method will return the path to the generated audio file along with `status` as `sucess` or `error`
+4. Convert audio to text:
